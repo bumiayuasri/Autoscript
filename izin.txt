@@ -1,2 +1,2 @@
 ### Rerechan02 202.152.240.50 Lifetime
-### AWS2 54.254.235.126 lifetime
+### aws2 54.254.235.126 lifetime

@@ -3,3 +3,4 @@
 ### aws2 2406:da18:f1b:d400:3c57:be92:5342:de5e lifetime
 ### free 2607:fa98:3000::36 lifetime
 ### myindo 103.67.78.34 lifetime
+### openwrt 103.157.116.39 2024-11-10

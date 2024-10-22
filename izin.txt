@@ -1,5 +1,5 @@
 ### Rerechan02 202.152.240.50 Lifetime
-### aws2 54.254.235.126 lifetime
+### aws2 18.143.76.149 lifetime
 ### aws2 2406:da18:f1b:d400:3c57:be92:5342:de5e lifetime
 ### free 2607:fa98:3000::36 lifetime
 ### myindo 103.67.78.34 lifetime

@@ -1,6 +1,6 @@
 ### Rerechan02 202.152.240.50 Lifetime
 ### aws2 18.143.76.149 lifetime
-### aws2 2406:da18:f1b:d400:3c57:be92:5342:de5e lifetime
+### aws2 2406:da18:f66:6800:3a9c:4619:1b2a:a522 lifetime
 ### free 2607:fa98:3000::36 lifetime
 ### myindo 103.67.78.34 lifetime
 ### openwrt 103.157.116.39 2024-11-10

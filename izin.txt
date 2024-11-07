@@ -10,5 +10,5 @@
 ### RMW2 2001:df0:27b::148 2024-11-28
 ### FREE 157.245.59.236 2024-11-29
 ### IDC 103.59.94.160 lifetime
-### FREE 134.209.101.64 lifetime
+### FREE 157.245.49.153 lifetime
 ### FREE 2a09:bac5:55f7:1028::19c:54 lifetime

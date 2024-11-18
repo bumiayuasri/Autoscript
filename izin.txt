@@ -14,4 +14,4 @@
 ### FREE 2a09:bac5:55f7:1028::19c:54 lifetime
 ### RMW 202.10.42.167 lifetime
 ### RME 2001:df0:27b::7f37:86ec lifetime
-### PRIBADI 146.190.98.243 lifetime
+### PRIBADI 143.198.209.140 lifetime

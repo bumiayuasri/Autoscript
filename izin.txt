@@ -2,6 +2,6 @@
 ### TEST 174.138.19.232 lifetime
 ### XCDROP 174.138.30.37 2025-1-4
 ### DO3 159.89.205.70 lifetime
-### IDC 157.10.160.221 lifetime
+### IDC 103.171.85.88 lifetime
 ### IKD 82.153.226.230 lifetime
 ### IKD 45.158.126.107 lifetime

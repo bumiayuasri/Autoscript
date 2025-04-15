@@ -1,97 +1,858 @@
 #!/bin/bash
 #
-# This file encrypted at Wed Oct  9 17:18:26 WIB 2024 by
-# +------------------------------------------------------+
-# | Author: Rerechan02                                   |
-# | Reguon: Indonesia ( Asia Tenggara )                  |
-# | Chanel: https://t.me/fn_project / Admin  @Rerechan02 |
-# +------------------------------------------------------+
-# Don't forget follow me on:
-# -  https://github.com/Rerechan02
-# Sponsor this project:
-# -  https://t.me/fn_project/245
-# -  https://prof.rerechan02.com
+#  |â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•|
+#  â€¢ Autoscript AIO Lite Menu By FN Project                                          |
+#  â€¢ FN Project Developer @Rerechan02 | @PR_Aiman | @farell_aditya_ardian            |
+#  â€¢ Copyright 2024 18 Marc Indonesia [ Kebumen ] | [ Johor ] | [ ä¸Šæµ·ï¼Œä¸­å›½ ]       |
+#  |â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•|
+#
 
-skip=70
-tab='	'
-nl='
-'
-IFS=" $tab$nl"
+link="https://raw.githubusercontent.com/DindaPutriFN/DindaPutriFN/main/api"
+clear
+#echo "Port 22
+Port 3303
+#Port 53" >> /etc/ssh/sshd_config
+#systemctl stop systemd-resolved
+systemctl restart ssh
+systemctl restart sshd
+#systemctl start systemd-resolved
+clear
+[[ -e $(which curl) ]] && if [[ -z $(cat /etc/resolv.conf | grep "1.1.1.1") ]]; then cat <(echo "nameserver 1.1.1.1") /etc/resolv.conf > /etc/resolv.conf.tmp && mv /etc/resolv.conf.tmp /etc/resolv.conf; fi
+clear
 
-# Ensure critical variables are present, especially when not defined by login(1)
-# Note: $USER may not always be executed (e.g., in containers)
-# Copyrighted code by @Rerechan02 / widyabakti02@gmail.com
-USER=${USER:-$(id -u -n)}
-# Ensure critical variables are present, especially when not defined by login(1)
-# Note: $USER may not always be executed (e.g., in containers)
-# Copyrighted code by @Rerechan02 / widyabakti02@gmail.com
-HOME="${HOME:-$(getent passwd $USER 2>/dev/null | cut -d: -f6)}"
-# PC does not have getent, but this works even if $HOME is unset
-HOME="${HOME:-$(eval echo ~$USER)}"
-umask=`umask`
-umask 77
+#Bikin File
+clear
+mkdir -p /etc/slowdns
+mkdir -p /etc/xray
+mkdir -p /etc/funny
+mkdir -p /var
+mkdir -p /var/lib
+mkdir -p /var/log
+mkdir -p /var/log/xray
+touch /var/log/xray/access.log
+chmod +x /var/log/xray/*
+clear
 
-shctmpdir=
-trap 'res=$?
-  test -n "$shctmpdir" && rm -fr "$shctmpdir"
-  (exit $res); exit $res
-' 0 1 2 3 5 10 13 15
+#domain
+read -rp "Masukkan Domain: " domain
+#read -p "Nameserver: " nsdomain
+#read -p "Api Bot Token: " api
+#read -p "Admin ID Telegram: " id
+#echo "$api" > /etc/funny/.keybot
+#echo "$id" > /etc/funny/.chatid
+#echo "$nsdomain" >/etc/slowdns/nsdomain
+echo "$domain" > /etc/xray/domain
 
-case $TMPDIR in
-  / | */tmp/) test -d "$TMPDIR" && test -w "$TMPDIR" && test -x "$TMPDIR" || TMPDIR=$HOME/.cache/; test -d "$HOME/.cache" && test -w "$HOME/.cache" && test -x "$HOME/.cache" || mkdir "$HOME/.cache";;
-  */tmp) TMPDIR=$TMPDIR/; test -d "$TMPDIR" && test -w "$TMPDIR" && test -x "$TMPDIR" || TMPDIR=$HOME/.cache/; test -d "$HOME/.cache" && test -w "$HOME/.cache" && test -x "$HOME/.cache" || mkdir "$HOME/.cache";;
-  *:* | *) TMPDIR=$HOME/.cache/; test -d "$HOME/.cache" && test -w "$HOME/.cache" && test -x "$HOME/.cache" || mkdir "$HOME/.cache";;
-esac
-if type mktemp >/dev/null 2>&1; then
-  shctmpdir=`mktemp -d "${TMPDIR}shctmpXXXXXXXXX"`
+#Key
+uuid=$(cat /proc/sys/kernel/random/uuid)
+echo -e "${uuid}" > /etc/xray/.key
+chmod +x /etc/xray/.key
+api773=$(cat /etc/xray/.key)
+
+#email
+#read -rp "Masukkan Email anda: " email
+
+#Preparation
+clear
+cd;
+apt-get update;
+
+#Remove unused Module
+apt-get -y --purge remove samba*;
+apt-get -y --purge remove apache2*;
+apt-get -y --purge remove sendmail*;
+apt-get -y --purge remove bind9*;
+apt-get -y --purge remove apache2*
+apt remove apache2 -y
+apt autoremove -y
+
+clear
+
+#install toolkit
+apt-get install libio-socket-inet6-perl libsocket6-perl libcrypt-ssleay-perl libnet-libidn-perl perl libio-socket-ssl-perl libwww-perl libpcre3 libpcre3-dev zlib1g-dev dbus iftop zip unzip wget net-tools curl nano sed screen gnupg gnupg1 bc apt-transport-https build-essential dirmngr dnsutils sudo at htop iptables bsdmainutils cron lsof lnav -y
+
+#Install tools
+apt install binutils -y
+apt install socat -y
+apt install lolcat -y
+apt install ruby -y
+gem install lolcat
+apt install lolcat -y
+apt install wget curl -y
+apt install htop -y
+apt install speedtest-cli -y
+apt install cron -y
+apt install figlet -y
+apt install zip unzip -y
+apt install jq -y
+apt install certbot -y
+apt install python2 -y
+apt install python3 -y
+apt install screen -y
+apt install haproxy -y
+apt install at -y
+
+# Information
+curl ipinfo.io/org > /root/.isp
+curl ipinfo.io/city > /root/.city
+curl ipinfo.io/region > /root/.region
+
+
+#link izin ip vps
+url_izin='https://raw.githubusercontent.com/bumiayuasri/Autoscript/main/izin.txt'
+
+# Mendapatkan IP VPS saat ini
+ip_vps=$(curl -s ip.dekaa.my.id)
+
+# Mendapatkan isi file izin.txt dari URL
+izin=$(curl -s "$url_izin")
+
+# Memeriksa apakah konten izin.txt berhasil didapatkan
+if [[ -n "$izin" ]]; then
+  while IFS= read -r line; do
+    # Memisahkan nama VPS, IP VPS, dan tanggal kadaluwarsa
+    nama=$(echo "$line" | awk '{print $2}')
+    ipvps=$(echo "$line" | awk '{print $3}')
+    tanggal=$(echo "$line" | awk '{print $4}')
+
+    # Memeriksa apakah IP VPS saat ini cocok dengan IP VPS yang ada di izin.txt
+    if [[ "$ipvps" == "$ip_vps" ]]; then
+      echo "Nama VPS: $nama"
+      echo "IP VPS: $ipvps"
+      echo "Tanggal Kadaluwarsa: $tanggal"
+      break
+    fi
+  done <<< "$izin"
+
+  # Memeriksa apakah IP VPS ditemukan dalam izin.txt
+  if [[ "$ipvps" != "$ip_vps" ]]; then
+    echo "IP VPS tidak ditemukan dalam izin.txt"
+    exit 0
+  fi
 else
-  shctmpdir=${TMPDIR}shctmp$$; mkdir $shctmpdir
-fi || { (exit 127); exit 127; }
+  echo "Konten izin.txt tidak berhasil didapatkan dari URL"
+  exit 0
+fi
 
-shctmp=$shctmpdir/$0
-case $0 in
--* | */*'
-') mkdir -p "$shctmp" && rm -r "$shctmp";;
-*/*) shctmp=$shctmpdir/`basename "$0"`;;
-esac || { (exit 127); exit 127; }
 
-case `printf 'X\n' | tail -n +1 2>/dev/null` in
-X) tail_n=-n;;
-*) tail_n=;;
-esac
-if tail $tail_n +$skip <"$0" | gpg -q --decrypt --batch --passphrase "fn project | Hw:Rc:za:VE:Mh:xc:y8:LX:zk:jj:Iz:om:9d:7r:Wa:vV:UL:ay:O3:0w:nD:6r:Xl:Ee:Fo:uL:u2:Zr:pA:vw:Lo:aE:Jw:gt:8R:CB:H4:zT:mm:id:rN:Q3:QN:jb:rt:hk:M4:bA:F2:jK:w3:br:UO:V9:Lv:8r:yn:Hk:2Q:oQ:SE:44:uZ:HT:bJ:2K:ar:6O:fg:PH:x5:Y1:eJ:uU:Yk:Ui:pD:Dp:jA:TO:pW:oz:dx:JB:Lc:TL:4D:EQ:ZE:l9:tE:je:fF:7t:Rt:kR:eJ:cA:AR:3k:Pf:iL:kL:yK:o9:bF:Lv:8y:iM:04:DZ:mi:qX:lC:1Z:fp:Kp:Ka:RA:IV:10:nU:0x:zl:8O:zY:TG:TK:7U:k6:d5:ag:Y2:Bq:gx:X4:Pw:1m:Bg:CK:u3:TZ:KX:cP:8K:PW:3l:YC:H3:JR:3m:Rv:SS:kK:Fo:Lx:gA:zM:TI:HN:vA:iC:Kc:CL:C7:rU:9d:xX:Y2:Lh:fk:4l:gs:1U:mu:SW:Uh:9s:GH:BG:CD:Tz:jU:R2:X8:tQ:gc:fT:8c:kj:6l:wS:GD:ng:1n:vo:CW:3I:uj:8F:Iu:2X:uo:WN:pz:rj:HJ:pZ:uO:sL:UU:Nm:Td:wi:6y:5Q:i8:63:ZQ:y0:CE:2u:Uy:1d:cQ:nb:Id:pI:aK:h7:s9:Hi:fJ:k4:jY:If:As:gE:8x:Cg:8Z:x3:xg:eA:aU:jZ:ff:Xm:Al:wy:Lz:jl:U7:Dm:oR:5h:Oj:Uk:83:2p:ok:Tw:lc:ib:YM:hP:q7:oL:54:Kb:91:Lk:GL:w7:yd:aB:ZN:TF:WF:mn:jB:FH:bj:5J:qf:wE:oV:Bp:3N:kw:WE:1Y:lp:VS:TA:bv:wn:q6:KK:KR:vC:O5:Yn:NV:4R:7u:t6:OB:Wp:gn:c0:RG:kt:TP:Vm:Po:U2:cz:xh:H5:J1:hD:vp:56:3o:FR:2t:fl:1z:Dn:Yj:HZ:Iw:t3:7b:QN:Pu:Wl:G0:r7:W1:JK:Mo:qD:Ht:8I:4H:jU:Ay:vD:BU:9j:DT:g4:Bx:wC:xY:ff:xy:DA:ce:Dx:7p:qJ:M7:Lf:7J:bs:J3:a1:3q:8b:TZ:TW:DF:Fx:kA:Kd:U6:jR:E4:2t:JN:rl:jY:FX:hp:zA:Fz:JW:MK:R4:25:jl:SG:IJ:w4:IE:Fc:x7:DL:y3:Bt:56:41:nl:UA:nY:vH:UY:W9:hD:CT:Bt:1a:tr:Jq:sP:oc:sH:tr:NF:KF:SK:bh:dd:Ts:Pd:xC:Jk:Jh:7n:BG:tB:b1:gF:sa:zJ:Yu:2w:2D:uO:60:Ke:ja:YF:nA:9l:30:GT:Q4:O7:38:cA:En:v0:e5:ce:km:mC:Ry:Zl:cm:lJ:eW:cV:uY:RU:p4:Yi:3O:Ib:Vw:ue:Zf:Lz:2F:dd:0v:JM:Uk:FE:Qt:7k:MG:ys:21:7b:xt:CT:ok:tE:FO:7B:0f:EP:U0:73:8Y:MD:kw:HK:pB:R2:YW:SX:V9:jP:9g:9A:O4:dQ:eb:jz:IP:uf:gH:i1:M2:vS:DK:gR:eM:bu:ct:Q8:tp:Xc:YM:SY:XS:68:rj:IU:9T:QI:Ec:GD:R0:u0:IR:Rj:nF:va:LN:IC:xp:HT:w4:OU:2k:kg:aL:gv:NB:7q:fn:u4:O7:t6:x6:Py:ED:wR:21:kc:pI:Ox:jk:gc:2y:v9:Qd:ZE:Yd:po:L9:4t:mm:8I:Bd:ay:d0:xi:8m:dW:XK:wf:Uu:Nv:Vx:Rf:NN:JV:KI:Ho:TD:ch:Y7:zj:h8:Vn:sp:UN:kq:np:62:ei:Yc:cG:HW:9S:UU:Ze:91:pv:Qf:tg:Go:lq:IQ:Sa:8v:j1:I1:So:Y9:TL:4A:gN:5K:Kx:G2:QY:Ee:Mr:yo:aa:uu:uh:WS:27:CI:DJ:XU:iX:4r:lB:nY:bT:MI:01:Ct:ZG:P1:H3:M6:VE:jq:qU:QD:2t:RK:Xu:6C:eh:49:As:BD:xB:4T:bY:9Q:hV:Q0:yI:rE:xQ:mr:uN:0u:KZ:MZ:rp:vo:oL:Ji:5W:G7:LK:LX:1L:qx:HJ:Qt:4P:xf:cp:js:SR:zG:hN:0K:46:ZW:QW:E4:0Z:8T:z3:vf:2p:D5:hz:Ku:9x:mD:fb:EC:Kf:qe:u8:qx:Nu:25:0L:5T:Lg:XZ:LJ:fG:lm:wP:lh:0A:tH:zN:QF:7t:L2:39:J7:CQ:qk:VF:Lm:Ky:a3:uM:Jz:Cm:yj:b2:Ga:di:Io:Gb:dU:IP:2K:II:5c:Co:oZ:A1:Zo:qE:uI:Me:1T:AK:iP:5N:pD:kV:MR:Mr:DP:Sl:bH:8n:q0:CL:e7:U0:3D:bi:6C:Xf:nS:sx:Qw:7r:Qy:3g:Os:uf:Wx:oD:J6:9K:03:K7:sP:Fg:Ih:oU:Jm:LB:NN:XA:o3:yE:5k:Fn:Pz:zD:SS:vd:SZ:X5:Tp:QA:i6:h1:SH:bp:vd:kI:8A:RA:gL:Wt:4R:jN:Yr:eb:fA:Qj:i7:28:5f:kh:Ai:Oj:WL:dm:61:Pa:DE:5g:h9:5O:Hm:CZ:VP:hk:ys:gj:TS:Q8:4T:ql:0o:hK:ws:h6:CR:aC:oQ:Rc:gU:xY:mj:4X:P0:qw:Wb:UD:hl:TF:9s:r3:AM:uB:Oi:Fv:Kd:Jc:vW:Za:Fr:oj:sI:Um:pV:A8:XH:xN:U4:WZ:QT:vt:4k:AF:MP:Bf:M7:EM:NU:8E:tq:Qg:kE:c9:hy:O3:dA:2M:A9:r6:i2:KU:iy:81:Em:pc:et:GA:WG:xB:BW:4w:dt:kC:6J:Jc:TU:dz:A9:Hs:Su:Np:Q7:59:Gx:zI:ZA:eu:4V:31:K0:cs:U1:yU:QS:2e:LK:fn:P6:4K:7f:UL:NZ:to:Cq:wf:IO:3c:Qq:gV:4M:Wd:eQ:lI:QZ:UD:f0:iD:l4:zu:33:k3:r2:D6:eU:Oh:9o:Uh:6b:XZ:Vy:ov:IG:sH:yr:uf:ry:Xf:Go:LU:8D:pl:Qk:RY:Hm:uw:Gu:Cs:o8:ne:7W:NA:Zs:m9:vI:R5:39:Yx:Z1:fc:HY:hp:V0:BW:J2:tG:gd:ce:07:Ew:y9:qo:1F:0t:RB:B5:wI:Jn:lV:9q:Du:Rr:cD:90:IB:tu:4f:yL:41:Cf:BF:iF:wc:rM:IH:C8:WB:hM:6t:ae:2m:zX:nS:Op:7H:PC:6E:mv:gT:cI:P5:Kc:8f:kL:Te:yv:6d:px:1e:kZ:M7:rh:Er:uS:u8:pK:60:KR:B3:m0:TA:X2:kJ:Fo:GL:cl:4Y:Lh:hr:Tn:0j:6c:SV:xV:1c:GC:74:A6:cf:gr:3d:Ti:ib:bN:Ek:YI:GO:52:aF:8a:Bh:fU:7p:v1:Km:xR:hz:70:7w:tJ:Ed:uU:Ye:qs:uj:sB:JR:uS:ND:ld:fm:Mw:ca:wN:oZ:ID:ax:Wb:p6:5g:Rl:Ko:6g:yw:P7:g0:ZV:Gt:JI:Mz:JJ:4U:jM:tQ:Z4:lD:ev:5Y:8Y:ok:nu:ai:2e:79:LQ:t0:q2:iy:wD:y5:7m:av:In:UQ:p7:g8:ar:su:Yh:5Z:lh:J8:f8:pc:2X:Fr:c6:8H:p7:eK:uP:0E:rI:7d:75:rN:TF:xY:8Z:Ds:bV:4n:99:kp:Tr:Gf:AF:YW:6v:lg:WD:sp:qV:Zl:aJ:Rh:h0:PX:Rq:aQ:js:D7:iH:my:ea:v0:7T:gq:Jj:h7:Q5:Bq:61:U7:LR:av:aK:rn:Gy:I3:Hy:FC:Mr:NT:8d:4B:F9:z5:Z0:ah:5A:Ym:cI:sX:oq:Wp:PV:HX:Ro:Z7:2F:qT:Lx:od:6B:hf:23:zL:mb:1e:bn:5X:gd:es:2j:ki:Q7:4d:Hw:xa:IQ:kn:im:vQ:Yq:nl:hb:VJ:ev:LL:98:nA:Vy:4z:QB:YK:Jo:PV:pd:E6:jV:Pk:ne:zc:Qg:P6:4K:Nx:mk:6f:vz:kI:YW:NK:ot:cD:gK:1Q:CL:mm:Uc:ln:G5:2v:hG:bp:Vf:0q:O2:vU:uF:ab:sm:mh:wS:BQ:LR:Dj:Gi:Ft:9f:BC:6z:u4:zl:aR:bL:z7:jl:sD:tP:Jv:DU:bI:8T:YP:Lk:Fp:xd:ic:Y7:PU:nu:Q2:zf:Jc:tx:Iw:QD:FO:S6:RA:Ue:wz:MO:n8:TK:x3:qg:vx:N2:Lu:xk:sg:de:nx:QT:2p:Fr:NP:BX:Fx:Rz:3S:ff:N7:iG:Zs:c1:MA:NQ:rl:w5:h7:AR:8p:l5:3W:lz:VN:2p:MD:7x:8Q:WW:4X:Kh:cI:s8:Jg:er:rw:xJ:fy:g8:Nu:LB:1o:na:bq:dW:DT:HE:e5:Bm:2c:h9:VK:RE:zT:Ju:gA:1b:vR:7L:L2:nX:tO:JV:O9:IG:F5:iI:Hz:nB:vc:1r:Wi:EH:9b:dN:e7:uQ:Fk:0C:lD:uY:hZ:oF:sG:Bd:rq:ZJ:i9:ED:bp:wU:dS:wv:F8:Ax:xJ:C5:cS:yz:zG:Fs:yq:fN:F3:ca:sv:KK:jK:cJ:as:1N:5v:hI:qg:XJ:Mg:Ft:z9:ei:CS:bF:cc:0j:Dq:iP:QU:0N:Xd:Fj:aD:lE:yO:wT:rN:vg:8B:io:TI:pa:UN:pV:tZ:Xt:Ig:8A:7a:rn:bO:Ia:1L:iX:Vj:8e:Yx:KQ:nR:d3:3h:JP:0F:Qb:oV:Zp:uL:AJ:NM:ZH:nI:1k:zV:0e:WC:gr:5s:px:0y:ls:QV:sX:H6:lb:b1:5C:n1:sk:sG:bB:Dp:du:SP:Gm:vv:A9:UP:sk:Hy:yv:Kb:H4:G3:8E:5R:xh:Df:6Z:VH:Js:vg:QG:LB:zV:ob:qr:Mv:fs:DU:YK:Q3:l9:uN:5j:ge:t5:Kh:m2:06:pp:qr:4O:dG:PG:K1:sG:YB:F7:36:5Q:gR:0R:LI:i0:Ts:Qv:TS:Ae:UO:zA:Qp:vS:Io:k1:2v:up:IR:MR:km:zq:2z:BF:RI:jp:Zy:Zq:jb:qG:fJ:FF:wE:LD:ve:6w:dd:7e:AX:qD:8h:jN:YY:tx:3f:Ce:rX:dB:KZ:Mx:aQ:Ka:7J:os:nn:J5:Po:3t:Fw:xp:uD:ug:YK:4t:uv:4x:VV:2Y:6I:ij:rt:Sq:Oz:ZD:O6:hU:xZ:KA:nx:82:F8:fm:Wh:3z:Rp:v3:oL:5t:yp:Wj:cH:Fr:Ks:u0:l7:2o:42:D9:IF:U8:au:co:L8:4s:YF:fs:gD:Z9:Sn:vi:gl:Ac:WB:P5:lP:Nk:i3:Pj:fV:ME:0M:FS:gU:lJ:ps:Ez:t5:7Z:8u:yH:s2:03:zZ:Dv:8H:2m:w4:MK:xR:MC:Xg:Yk:Aw:FL:h8:XJ:Ij:SD:cj:HZ:pS:0j:5G:JS:eh:KK:3g:pr:tm:Fz:Ia:Ih:nS:N8:cw:8O:pJ:57:QF:SL:Yy:GR:UH:3o:uI:jW:Pt:78:hi:X2:6J:XQ:b5:mH:bi:WQ:mm:d1:6H:OF:U4:bX:wM:lq:yp:EV:1X:JP:RB:7y:ki:Os:Ae:H1:Ku:AU:ZE:6O:MX:8t:oc:EO:mn:tp:jh:Sp:4F:Zg:kl:e6:q8:F3:k9:3d:09:nc:YW:ss:lO:zw:EU:8q:BB:Av:T7:YK:5x:YZ:CG:ph:KA:tV:QL:ps:ZS:Hr:T5:vm:BI:fn:xd:O0:WW:45:tu:oE:Kf:tj:5b:3t:X0:Wo:dd:U3:6c:aZ:s3:n9:Hy:6F:Ax:LS:XE:tV:3k:7f:Ib:ZC:89:9n:NZ:ti:Lc:3T:qV:9X:7a:jB:py:EG:dJ:IC:DE:7P:aj:hz:sm:cu:3X:yx:wV:K0:v5:uG:WD:Oc:Dt:rY:KZ:tv:Sj:ya:h5:8U:Sr:ya:yi:GL:Jd:ec:A3:Xw:cR:qL:jT:X9:wa:mm:KF:VQ:ZV:fL:I5:oc:jE:10:OS:oi:c9:Q2:q7:Bc:uY:mQ:K6:Fs:95:mV:C7:te:9V:nS:r8:2C:LO:xz:NR:dj:2C:Xu:wj:nu:O9:vR:LZ:J3:89:pL:pF:mF:WZ:4p:Kz:ZS:k1:RB:YC:i5:Hk:To:6y:Vw:DP:5X:UB:BG:4G:Yc:AU:qc:p1:sl:RJ:DU:2k:6w:4F:gP:TK:id:6m:KY:3B:pZ:PV:kP:iH:RU:su:3e:ue:nl:MA:Mv:GG:XR:ao:u5:Vv:uV:vX:68:a6:m4:qp:i9:5A:4I:2F:rK:16:Mt:il:ib:3t:Yd:OH:8H:qa:Ui:ul:Lw:Kx:Hx:Yq:cr:s8:y9:Ea:fr:Bn:E1:3G:l6:qZ:C8:XC:y5:dv:sg:xe:2n:zm:q0:2d:k5:Rg:Hr:np:am:Q8:8l:RZ:fC:Zu:u8:c9:iG:8T:eq:wi:DI:9l:UG:HE:Ux:Mo:iA:Pa:VF:1z:oe:nE:8T:LI:Us:7E:Is:O0:MS:Cx:kN:WN:c5:5Q:jb:Qw:SX:kE:Nl:Qc:OV:gs:kH:h8:xT:ot:Mj:UW:bN:XQ:Ui:ro:sN:SS:nn:Th:i9:ie:oQ:3P:Gw:EU:5R:3o:zp:cL:Id:iV:yb:sw:ns:EX:Hg:Lq:Mx:ES:sR:HJ:TH:WU:I1:cM:LE:gw:tT:YR:2t:3p:mo:xK:En:0G:ZC:lA:Bj:rA:Tv:UB:Yd:TX:d6:9b:4G:6Y:af:CZ:Ti:XK:zq:iK:Le:e5:mo:QQ:P9:xd:aS:3T:RV:L4:62:kO:ko:hz:wQ:8S:Ho:Yo:AM:aE:vR:7r:jW:Ul:l4:XW:py:EJ:LP:7D:2D:bq:x7:3J:zv:mf:zy:aF:d9:20:7I:Pn:TP:YX:SK:lS:oQ:Wk:pQ:OJ:O9:zH:8h:Eh:19:f2:i5:cg:BX:yF:Zz:Fp:yw:wS:Yp:XN:nj:2T:OD:sW:in:0Q:0W:gb:Zj:wA:cJ:dc:Pd:iZ:st:7l:2b:g8:Ic:fT:pr:fv:Hr:jO:m4:Pc:xi:c7:Gx:Bg:Zm:qt:Si:Bc:Xr:yA:lJ:gk:FX:zh:lk:8S:kC:Mv:5U:Cf:T7:vq:F1:R2:TV:HR:kz:1p:ex:P4:kF:hV:3j:da:5k:Yv:Qt:Xy:Ng:Qy:7O:D3:qA:xl:is:LZ:sK:Lt:aQ:dB:lR:GW:lx:DI:bG:P2:R3:gc:JT:Rj:FG:xO:3n:vw:cr:gW:4X:b4:3Q:uc:E5:7j:D0:RY:49:6S:Ms:Q4:Tb:0Z:yi:8n:3E:tO:Fy:Oy:M5:IT:H9:E8:ig:jv:L0:G0:F9:ut:e0:Gr:LB:Ax:X4:dd:cr:Ko:qF:06:fE:yV:oN:NG:Qc:Q3:BL:sH:gz:ib:pM:z5:m9:Ut:vx:AZ:hj:YK:7C:PI:gF:hD:sd:2Y:gs:tW:ZW:xa:aT:8y:bO:53:fq:Uz:Ei:s2:dD:kh:B5:oN:0i:xk:Jn:ri:Lo:um:4G:Ky:qi:F5:bC:Pc:A4:WJ:Y5:pI:tA:mj:Oo:9N:h2:pl:nc:YI:DG:xx:4O:ka:lu:nr:JS:xN:bW:iy:yB:3o:59:NK:4j:Iz:XL:2t:8c:XK:Fb:Ae:Fu:P2:iT:jU:Nb:hC:Ds:Ax:tA:3E:n1:LC:he:ub:Yl:0f:ur:3Y:v3:qE:BY:xf:hD:wB:b4:ed:S5:Ww:Cz:cl:Z7:6a:vf:aG:TR:IV:1l:GS:S7:EH:89:yy:0G:9P:N6:kO:HG:uS:pQ:TB:6y:Nk:o1:Ia:z6:OX:lw:HQ:Sv:uh:12:lA:GY:gj:Ua:8o:7r:QZ:Ve:8i:2H:3x:Qe:0i:GP:GK:H8:s7:ET:2j:N6:VY:pd:Lc:fZ:wJ:FM:ds:er:gn:CM:bB:n9:HG:ha:UU:2U:GP:rZ:7v:bY:zZ:Dp:TD:IT:bM:n4:Gg:5U:Ww:i8:Gg:ov:os:Nc:K0:JT:yI:fk:JB:Nu:kL:Iu:Io:ty:fG:U4:AB:gz:nU:qB:bY:n1:q4:LL:2H:t5:cO:S0:UX:7N:Gd:oP:rq:NN:JG:eE:14:R4:xN:5E:8D:3E:TB:Tm:L9:dg:O4:L2:wS:7S:C6:Pj:FO:s9:ut:Hl:8E:Nn:h6:av:Bo:aN:MK:ql:gP:ol:Oq:fh:dp:AZ:Zm:Z8:rx:Rz:9c:dL:UC:WS:8J:Wf:bW:wN:Eo:MN:Ty:f7:xe:eC:3A:JM:7y:Kf:Re:v5:a0:wi:Dk:Bs:0D:kb:5v:7k:v1:VH:SK:Yw:zk:gm:E0:uZ:nu:Nq:5O:6N:qm:4K:sC:zI:KO:X3:sU:Rz:Nw:DV:KJ:j7:YG:50:VC:LW:Gn:Dp:n3:gW:35:fM:tu:97:pG:ge:Qx:H9:eM:yR:cs:9p:5x:Yb:xc:Bv:xc:gG:KX:pp:LN:mj:5L:mQ:PH:Iw:kz:8H:es:vT:Gn:Ji:5D:9T:KW:Jh:jx:K9:up:mC:1G:Lc:SH:zO:4J:8e:5N:v1:Mq:79:rj:XW:pA:8T:3U:2e:Ge:PH:os:Rl:qf:pH:fA:4I:4k:dL:Mn:mY:hP:VL:Ph:Ax:BM:k2:UN:rP:tC:Bh:Qn:tD:mG:4z:yY:Y8:Wg:vB:mt:Cg:C3:L7:Ts:k7:T2:Ri:s6:0w:1O:Zn:xL:u0:6o:O3:p1:a7:XR:2E:Zu:OT:Gq:XA:Q1:lc:Aw:OR:Cy:YS:ix:ea:Tr:Ku:l9:LQ:3J:VZ:EX:2p:Io:oi:3k:tE:mI:hU:x2:R7:Ob:D2:OL:nf:rH:55:du:kb:Sr:ON:Ye:rH:Ja:p9:UF:lS:lH:ZH:6W:My:VO:YW:Ra:oM:3i:Xb:cZ:BU:mF:60:0L:Pb:XN:bm:Km:ns:UD:Ub:IZ:Jw:Vd:aT:HC:fQ:0M:NQ:m3:sa:p4:Ka:hA:Vn:6f:YG:9R:En:fE:uP:Oo:fH:Pn:rm:eZ:S5:os:vK:WP:PU:7C:CU:3f:gF:Ih:og:Ci:Hm:TN:Hh:z6:7w:vO:H0:AH:AD:36:1b:fu:Bd:cr:uS:Q5:58:BM:fX:g7:er:8h:HA:Hw:Z7:DM:L4:L0:gK:5d:Pj:q2:Ac:cw:gg:rq:4n:n1:jT:bf:78:87:Wc:1M:AS:A4:cr:9T:9z:A9:QA:LO:MO:hI:TM:Wj:ic:C6:vV:u2:sb:41:eX:jC:C0:y9:sb:XT:Sk:IM:3Z:ge:Fe:Y6:A0:rb:Ns:kO:yD:uH:th:ru:Fe:T8:Lp:SN:l7:ua:qe:1A:tQ:vI:Ui:q6:3J:mE:Tr:uT:Qt:vz:AP:Ks:fh:uC:sw:87:sh:Vi:yl:qk:vR:M3:Sn:U9:KI:OP:1C:vV:OC:3D:QF:1J:Rt:E5:DW:qt:Cc:ly:nF:Qz:iJ:W2:IM:af:ni:9W:bG:tg:3p:zn:NL:5j:T1:OZ:5N:yX:vF:XE:Ln:7C:c4:YU:jr:xC:nN:bz:Iy:9g:ZL:Ab:7a:G3:5K:u7:d4:Bw:td:qe:nH:jT:Q4:yK:Ii:Q0:So:Pm:nr:zM:3C:2F:nd:dz:Rn:kU:k5:6B:Sr:iR:zl:OH:XE:sc:uH:pY:vg:ap:4V:BU:m3:On:uc:3S:Me:88:uw:9E:dR:jL:QE:FI:A6:we:Vk:Kp:FM:zj:TV:Dg:TY:po:wG:J4:yB:c0:tJ:L6:m9:75:xW:rA:rP:OS:d2:NE:a2:5f:zn:BE:jS:12:t4:kR:Fq:En:iY:at:G6:Hx:CM:Nb:GE:F4:rb:W7:AX:ct:9F:qX:ks:fC:XU:Aq:iz:bp:rl:Lp:sR:JP:3U:JJ:OG:Wr:EI:Rs:w6:Hg:VV:Zx:wP:gf:cr:vl:26:4e:08:ZK:Db:qy:ER:Vf:F2:GJ:kN:tO:gP:WU:fJ:sx:dW:uk:GM:45:pf:RG:Ex:xK:aV:CD:Tc:cB:QY:Gs:K8:RR:St:Kc:cB:VN:i5:N0:3a:VC:9G:Jp:jx:wy:KZ:VS:nf:6P:lV:oL:mx:L8:uq:wb:jH:MU:Mc:In:2d:0g:6k:lp:MS:0C:eU:m4:Nt:N8:WG:qD:2D:MY:cx:PL:k1:W8:wH:8E:V6:Mc:0y:5u:4H:4T:f0:LJ:vN:ZR:dQ:0L:3M:Q5:IG:K4:f5:ja:oA:Pc:RM:Em:YZ:bj:0l:6S:Kb:50:rZ:xh:eZ:RS:Zv:MN:Oo:Rp:ey:eY:Kr:UJ:Ko:ps:TZ:LQ:Kz:WH:km:zO:a0:Nv:ip:Gf:PS:9R:Bp:BL:HY:cu:8L:6J:0T:xa:1B:qU:JM:ui:N2:LA:Zx:tG:3T:WJ:pl:Q8:pi:hG:SW:Hb:aD:Fs:Tj:J0:Mu:47:dA:7d:ip:DG:n3:Q0:6S:pC:b5:SK:VQ:1i:cq:qa:qR:m1:5W:eM:mZ:ev:rE:Jk:fL:Q1:SU:Xx:lo:mL:DN:Lr:ZJ:ut:A6:UD:Rp:5k:Os:VV:U9:1C:AU:FU:Qn:if:bF:Pd:52:Ju:hU:3W:0o:cI:YQ:C0:rW:QB:1c:xX:PL:Cb:hx:dx:wn:Q0:Ri:Kq:en:gm:MA:2A:Vk:VO:ch:Cf:Vf:kw:9W:bX:Mn:ZA:5L:BC:rm:5X:YE:Xa:Xe:RM:sI:Ex:JK:Ig:aA:4V:eQ:Ys:ft:ve:ss:Bg:nG:IA:r9:OM:0Q:Db:0W:CK:2y:ah:wy:jR:g7:lK:Qs:dc:bU:bn:mO:Gm:ij:wU:YV:w2:rE:OY:YO:6V:t2:nN:x1:Qb:hJ:x3:nJ:Oe:Vv:FL:C1:AO:vj:vX:XR:fL:dO:DL:LZ:q4:d1:DO:rG:Jk:bj:3a:7v:Q7:kJ:yT:2l:xq:Zl:Ti:Sb:Ay:Ll:0m:Qp:IZ:5Z:hg:nT:qN:B1:uV:bw:7O:Ji:CO:nT:tf:1t:cT:ra:mZ:ss:4F:EA:sU:Oz:kF:vs:7v:eY:h2:uG:Lk:mU:CK:Gv:1Q:te:sQ:xY:yw:UP:So:Wi:yt:fb:q1:t5:kc:Lu:iw:t6:iv:PN:VV:he:DV:xo:Q7:dh:4X:IB:Js:ll:v3:H5:Fa:jg:dy:mE:AZ:B6:RO:4g:YV:ZM:JT:bo:Nq:eX:lz:AP:uq:UX:xT:gU:Lw:2K:cH:jr:Nl:Qe:9l:y1:C1:tW:kj:Jj:kB:ce:S4:Pz:OM:GY:jQ:50:3b:Ug:Zm:gZ:VU:2t:83:UV:lD:YO:Kv:a0:tm:4z:aa:KW:32:kP:RM:t8:bZ:g4:jS:fk:0J:4a:Sm:KT:x7:Da:1E:e6:FG:Iw:kL:Lw:At:gP:7X:yz:1A:Zn:It:O1:qv:bw:9x:7o:Gl:ih:zu:ot:Cr:jR:Bl:uw:kq:of:vD:s5:7q:Mq:9Y:Qq:P7:DM:Yq:9S:QE:78:rC:E2:8V:sz:2q:z8:24:Ih:pE:nq:MJ:Mz:41:7N:u5:vU:8p:r0:sF:S3:KV:GB:sc:xn:Xp:Wu:Rr:nh:0v:2x:z4:fz:Em:gz:Ej:fY:BK:g7:Bc:uE:DP:N9:nm:LJ:jW:Ij:0Q:Po:Xz:zi:n8:lz:YO:5B:fL:94:UY:ch:Hc:zG:9x:Ze:un:2Y:Mi:Bs:dh:p8:F1:4E:iz:U4:AT:N4:l6:Ur:eH:4Y:wV:UE:pH:fs:5X:7G:wX:j0:RY:Wx:8G:qS:0f:iH:TM:i5:Nf:Fj:dv:Tl:XF:QR:51:PX:Ti:04:Cz:gs:3g:D2:w5:ED:sm:0t:4c:dd:tS:Ni:cq:AM:rN:1V:59:UN:Ct:eG:sl:L8:9c:2s:sB:Gk:0C:hZ:6W:fV:BR:wt:zk:LG:2g:L4:5i:dM:KQ:SQ:am:J3:6k:5c:o1:t7:PF:52:RI:lI:vq:WO:xB:ww:ZL:Or:74:eQ:bg:8i:tf:Zd:lX:Ng:J7:IZ:3Y:hx:se:AE:DO:zZ:nx:7e:eH:Xq:9V:1i:OH:je:Y6:ww:UH:Vd:Sc:Mz:NV:eN:18:7m:2P:Tz:Zv:Pc:eg:Hm:27:MF:cT:ws:k9:66:t5:Op:u2:RV:0Z:vm:xm:hi:Hl:Aw:5E:Te:cp:LV:ds:mg:zi:Sg:Id:zq:ik:4R:me:4y:tJ:ea:c8:wW:Vd:jU:TZ:qU:Ps:et:6U:xd:BC:mQ:1u:qU:ls:Vx:dl:fF:81:bc:np:IE:a1:Zx:y3:qp:wc:44:4k:FU:Zh:iZ:XY:0y:XL:cW:UR:jW:z8:uo:Ld:Jp:dq:1y:sn:52:fB:mS:O9:PM:yE:ZI:3r:Aj:UP:Ry:Tm:bU:CG:Rb:G4:UH:ab:UH:iv:3y:fq:IO:FO:EM:ba:fs:uS:2U:cG:gd:JV:Gv:A2:Fd:5E:3M:uG:NI:7y:Rd:8D:1j:aQ:eg:5x:aI:fQ:UP:2c:Py:kG:58:iB:Wm:i6:Y9:3T:Oy:Lj:j0:OJ:qi:id:Kh:6X:Ym:Sk:gk:u2:zJ:Lw:Vk:Yu:po:6g:ZR:74:0c:AF:99:kq:3x:4k:WP:Av:or:bN:WB:F7:BM:r9:qt:J4:MF:O2:Sg:xb:TD:Ey:R4:MF:xK:rh:Ri:gC:FE:9W:sy:Ks:ay:QN:WF:Sd:hf:SF:zI:OU:eU:eg:O8:4W:KI:4H:wi:SD:Be:mT:CV:QY:fS:h7:n1:Yj:ZP:8u:7D:Y8:12:EL:mA:XQ:m3:O9:J8:gn:d4:zJ:CE:Xk:in:7D:ga:fO:5A:aW:EC:K7:pe:fh:yq:3c:UH:6e:h1:mE:qH:i3:gS:tQ:N0:Of:tk:ku:Vu:UX:sm:WF:CH:MX:ni:WA:il:zo:WQ:Ze:5j:oo:RE:Ex:CC:Jh:su:K2:9Z:Kf:8n:7h:1y:En:sD:7p:d2:VK:pB:Xm:a7:MS:lS:Xo:iT:yz:ac:1T:Q4:Iq:VN:Lz:I9:O9:2b:YF:Tx:ob:AC:jd:ZI:gU:9O:9Q:Xe:a8:wa:HN:zQ:de:mH:Dh:wC:Ib:Sl:Zi:Ud:4X:rv:bv:qq:aW:Oi:rx:CF:eC:HH:M8:rH:bX:6S:bm:PF:Xo:fs:7o:Uq:g5:Ok:mk:7y:3U:OH:RJ:Tj:6f:7T:lp:VO:3V:Si:Jn:4W:k4:tN:9N:7Q:yc:of:gP:qG:oP:8t:gz:Pc:vs:JP:Yh:4G:wd:H1:WX:A5:BF:eI:G2:SO:e5:T8:J2:Dj:uQ:3p:6E:O3:l8:O3:TB:wQ:kd:yv:dJ:nr:Nf:7f:ZC:oN:sG:T6:oo:lh:yF:H2:Uw:Dj:Aa:DF:OF:Jm:ni:SL:51:WH:vT:kv:m6:oO:9z:gD:FW:ue:3R:4W:k9:1p:Pu:2f:TO:BO:9R:hp:RJ:0f:2U:O5:dh:c1:br:0Z:q5:Wr:nb:Ip:g0:45:4o:ID:Wz:Kd:6H:Pm:6x:V7:I5:Id:oP:Yt:Ub:HJ:9u:nt:x1:UN:aX:HO:3L:GV:aY:6R:6z:F8:8p:82:Sj:X9:x0:ag:2E:eT:uC:cJ:iY:fU:qb:H2:TB:gE:HB:W7:7o:Xk:ji:oc:XB:Rw:M1:6q:am:EK:lI:dO:cX:oh:48:Qg:Uu:T6:12:Sl:lr:MU:6q:aE:yw:7U:uX:TC:Gp:Hl:60:Y8:FL:uC:bc:c1:2o:oL:fo:N6:64:Xi:GF:3k:TY: | Rerechan02 | @Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot@Rerechan02 @funnyvpn_bot $ | Projeft FN" > "$shctmp"; then  umask $umask
-  chmod 700 "$shctmp"
-  (sleep 5; rm -fr "$shctmpdir") 2>/dev/null &
-  "$shctmp" ${1+"$@"}; res=$?
-else
-  printf >&2 '%s\n%s\n' "Cannot decompress ${0##*/}" "Report bugs to <widyabakti02@gmail.com>."
-  (exit 127); res=127
-fi; exit $res
-Œ	mÀ»
-ïŠ,ûÒìØ¦_«ĞôŸ†yhDª­Õ8^ÇWp¡Ï1*ƒ¿òÖ|æ=’ñõj"da<é_å½YÿåĞNjêŠõ[YÕ¾4oÂcc5·Î©ˆr,â$V}¿İX-ÒÇ»½~¿Y¯s/0å"$sÕŠç†¢ïc„Iü¢ñC¼#Ôİ;¹ê/NL¾ÊÏ{İõƒ*yd¬S] ¾±9ìİJLh;f[T×÷`bÆ 2%3P¼Åè=š+ÌĞJæFùóÚÄxf>y§Vô•[¬€“áëçqbm«Xv]bL:¬õãĞµ×Ôé)ÜN­|zFê¡õîá™8¾…cıÜ30térvK®eàMEÅ¸<ôÑ9æùšÔ+¥„d;½ª£³˜ÏÏã/´8xXp=flHA¨SÌo>l¹Ñúóı0ê!6xaÖ>/ÙŒ=´ÿ‘TåæÌ\çPOUNö9«?ácèáüæ¥?Th²YP	Şn¢*Ã^zÜJ•š¿u"°4'¬£b‡;Oş/éİB/éÌ˜²==÷(Îc|ò¥IFm65<`ÃudDIüHµ¨z¾ŸeĞŸ8İ¡•,ªêP%ñq6î7eéµ»f¿AŞ©ğêÑğ¡"åEŸ@ùB™ÿ©*v±ã¢5ÿ»èùlnÖ“Ê¬$æVÖàOÍ4|> ÔÎøÂıX§^qÄô±R¡ö£x‡°S¼Xbæ|—†àcË…#~uíÜy¤ØHø[-y(İñg¬Ú©æ[¦¥5ù‘P¢{¬]•¼®Eö?!e/yÕbQ2•A6_T”™(ïóÌín šş1ã­ «&ıHc4gü	“¦‹:lËá¤äÑd.è‡™;0UI¹,ÄheX9áo5ÿ§Mhë‚Òî4îZ	{I£3uæ%“”‰?Ÿk@§ûqw[¤/‡¤HRNœBœ
-”SÓ;ar&`™—jé³šD¼îUäĞ±D½0)cél4¨tx”/!›ŞÁv)_./
-ì]Ô&çá×AÀC" ‰÷ïÑW‰X¨AMPŠ_GŠÌuV	"y0ş?œÎ<Ã&Õ­^UéßÜ+¸~h¬êé	ôÁb+ĞØ'8PŸLÔd´xfµ
-ÙÒ„1ZPÌºîÕ—ç+H©¶Ş¦}ÂU…şxÀ96_bİèpqÄ§‘¢™øÓû•ëÕî»@›±!ù=¬Ë0ú`ĞÉ~£×—vc‡Í.à«¢1¦)Ù wÒ•rêğ°³XÕ YVM	Ë”°Ç«ç)ßÀ,ox—["PA:æÏ,T³+N˜%tUqŒŞ’ağ+Êˆ&5d+$GJ^wøªÌã·Zß1ÓR‘ÕŸBÆò‡NªpÖ;²·Ic6ä˜¾Ë…EÆ&z	'p#vÂjÃcE>Ê¼ÅÚg™aT³Šãe}*6•µäÅöSÌ‚sT¾mUŒw0g9ÉËGŸà°24B:Ít;SÚœxÖ°Mßô/Œ\!ã:¤p-1)Ï²°ğåêåh¢õ¿™»¶òÌˆ tå	å5y`xÃŠş\g1*ÿ¬˜Ûı×ÔY"v‹OnQ;­#†ùåÃùk•gP??ñäš+ ùÆQıZ|÷;ß~ƒ~‹D ‘N§P¿=uÿR	hJ+¤-R}ÉÃ³øÔú¹ÿ•0V$ó®sg
-‹}ah'›á­¸Ü$ÿV¿_S+ô’°Â›ÚÍ„Ù´¹,Rs¶ÓôwGM4``L¼H`|@ÿåòİm¬G…¿?(CóD&ÙÔbŞ¥n.¡ü'ä™OÕİeQmZ4?¨ú¨éZ€ˆâ‹~ƒŸaüìGI½¦(¹‰Éa³h×Á×…ê]Ú¯»D^›ŸnU`™M9Ò‰`©ãÓ¯'‰«ìe1ÆHfâªÕŠOô=GÅÛî`Ö’½CçÛeU¨Ğb/‘è):ßØ,ÍÃ·Ái°°hnF’<:UæO)óŸËÊ½ÊŸC³åÅ9oßŸN}6È¸73-¯3MbÏ²„gØáäĞÏÿŠ”mk«RX³*åØ­Aìwlüp™Ñ)H-ÓƒÓùòĞğ…G§ŠÚ6äáõ‰ÛÆ%3İg˜ìI³óG¸û\Úqu<4¬Ùé}WNd½Óú~òØÊş×·b¬[…tÄšap1ş6û+ÿÅ-×4SŞë1vìzŞP§7ß••,1Q~“˜è¼S©“lõš=ˆî’'ÛÀO²‘è,L7 ´Å’Ä_{!{jÓà"?ºÇOÖ0´ "MÌZ,ĞÿG†­˜¬Ğ;øŒ|[Jä´tì'±ÙUÑ–3ù;‡ÿ'øì¥Q§°â°bşóv„ "í+<ùÜU8-·Län1•Š"S{©;š·C"ÔW,‘êD·—@f>÷pÖçİÀÂ…ü‰™ÿRİ¢MÑ"š0Š$Í0òdø í§ÛÛ ùíñÏ­×ğ¼èJR,ÌQ}2<Nî?(£”Ô+şL« „Xßèäâ„_ìíÕ¸Æâ]ŸöÍ|…á_sÊ¶d²õotidzÇnd_˜p*Ÿ×[hÕ[ä$>àFĞ"–c%"*¦NY_ë'	>RNúÛ‹§ÿG)­ø‚ªƒ.ex¿<ı Ã^0Ø² f£·¾{‹„Pc€¼'7Û÷f<Ğ|¦`°é-5G£yÖ8ôtØ• Š3së>æµ#AfeJ§ËE¸:\ïXV§›}®o—MÄÁØ7³­jVÂ¹˜o¿î^b²UGñ¢oŒúl§6Àq«	CÅJæU#l 6Æ%iW¯ŸÀ0¿^ëğ3Y¾³:¡¿JBŸc£À}n@	`÷OjyµóR•™Då'ş¡»SyS;æ«»>Áñ¦Eí­\ÙËØL/\>·­ª²*ÿn}C`ÖI|ÅôÖèÛBáE²Àƒ>ûB‰lCæé£àÓ&h^É7»9î
-t@owhåM?híŞ¢ƒ¢Cj ­0A}„h‹µ&$é°Li.Y ©;Zù¬ßØÕµ€ÿ§Oög1‰Ö¸_Ü‘óÿÖÄ“{ğ;lV³ÑMä\Í{ÈäìÊÂ‚
-ç^Lº¯M"=¹¸ƒpö]…%ÁI>	Bs6“nXìw6 éÌE¹ÙÚä÷føÂŠmı0Zı=(0›ß=!Ø§'HGVjÄ·JØ5ÔÚ>åŞ,¦vÁå+p«¾ji&«|u,_"†UşGë K+V½À}ÇÖø ^“ 3[O6·é(ÍÀïıdWn»¼Ÿ3+â/»VŞÌ©eàß¶ûclR”z'S.éTşàÎÌ¢–‡ßî*2øA @ Dİş9E6¡u˜Í‡:ZmÔa¿Tªàk;ƒ±l˜üÔ[ï¥i:D#˜Ğ8IıZãõÏŞ7ŸğEU±k#z>ˆÅ½·GÈã«¦Ñ»x—¸’ÒôÿWÖğWRîN?êGˆJ.va“-2\+‚Fî™v—ÂEö;ßIÆñ¥™<åvVïXsn›*[×Ğ·ÓSDºšËsäÁ¹¤ı·±÷ÕQR4şŠ=‹œ{DâÕß¢9qFşKY0|®[‚–şJĞ£jZOø¤á;k©;hÕÖ’³Wà1Éïˆ`&×Ë=qö²BœK²Ä¨bÙ2ª!’FZ ÕlÙPcÿ,Ê‹<³Í\AQ‹üÑé¾ê@*	ÆhâõC|¿ïâ>µÅüaYBÀ":n;BLMç¯¶tf“õ®ö2„>"Ä..ÏÃš¸\ïÒÊî¶G®œŸñ7ïÑÃOuR!–Úúÿ&9-ÿÑZ oÆ:6½çh<;{kOùöù¼¨ÿ9jIÈ¯@z¨ é´¦ëz“Ï"‚Z;ÊØd€L72ûËªt ùˆÿéÿ„‹b­ÒliÒYG¾üÓùà˜ ˆµ³@%1ôRŠcÏ³–Œ¹4RWûã ShŞ¥ÓX³Ç»Vºóu|"È$ëó3õÊbê˜+š¯®Á…ê;z°ûm®ªÍĞQ‰&@n³r'4`”©º¡'±èz£.ÿ‹…îÙÇ–vÒí¼hW„ï×„'5ç0[ùP €º‘r²£W§ı
-¸¹Jé¯ßÛÌ2@?=–­\•b-meÃË,&|EÈ«ÄÆ„ÍzwÙ´æíg0ad6‘3
-ÈJa~6ÅkLÊM4dNf1÷;ª<íE÷àĞ©b¤¨-,µmÏÃ‰­İB# ‡ß‚FD5Û[XâÊ‹IäfÚqyDô±5?YGëêôğ\4oä:?Òäyi$ë|äç,)—.‡Túİ$#7˜¦Æ"B€ãlwÖ»bíé1ƒ ’•×²ê6KğF$Ğ'|¢3½¡ñQ¢rpşØƒ WAˆ°Í`dİ‹º¦v|=Ö`w³·Œ18p‚¼áÁÄàÃvAMàÙ]I:‚n$¿²ÔàC‚’Pôû½¤øºmx)^«>©Ï9øP51ûïI[ø¤âóåàŒÚØY¡° ñ¯Porà·™5ÛUö‹ò1ä§V¡¸æWÙ€ïÓH’€K‹3È–É0¨!¶#ír	ŸÎz]ÿ¶ır€:Ê@FG™kœ<Ü´ø“‹uÉÄWÓ“)e½R–ö)%#;éw¦nX=pô‡ÆYğ[?dødd¹÷ŞAéÿğ¸VvÌ¹×ËFŞ ^H»G1WÇcï]Úe¦¸vÅ¯DÕ¿*xã³é¬šÅ®ƒÔ@§æRÿB2ñ½¶x›)±= =ıìğæ¹Š d0AŸ4bıXvà.gğ¾	š„91‚õğ?ÄKùHÏÜ‘¾¥â7ßEïÈ'½×DKà»ÿ°ÿX”Ô×_öÙ¡‡PÅûƒø_|À4ñ³i.AQ‚zÆNO†±¶MãRÎgƒVå{pXJyÛíBbšËúÃìõ'²€vÌÏí¦Æş_èú¤¹ƒÕÂwıÃèöÖĞz’0ámHãë²Î‘>”eÍLõÏJaaÈp]yõİÂHOi¢6/V7"6!Ä“~·ª*dÎ²M=9$dØ¯ä’Kzºà¹êFÌvx
-)eÒ‰> 5İ¿$ér$ál™ÍÓmîéüJîXKRîK}#ÚbckoºÇÒìâÒ"| 1ì‹0ù&ÖÂUÉ£Mn_ÈtıÈŸ‰ä`‘†¸Ye'ÿÆ!×[6Íad¦cø4t¨É‰.5y+Ï!bòRËa>G‹pŞüï±XáNt®WÚjÚøüïŒêÉû³XFµAÃ¦tÜ'åë&3±Z™ÕAàÌÊ@êù8ieÄ ìX:ª•hB@>H»—„ü'Ö¸v±ªë>ıºSÀ8¦n.e#ev‹é`WÍ½áBN£0+Spœw@µ¼z­k¦/	Gˆjx‚idÒİ‹		‡yc´-J½ˆKè¢¨$¿ïZ]ÂsÖ´J~©†KÁ³3vÚ®s†«}ûË>ŒUí_å2óyTîí¡¬u¸õÓÙŒ“ˆ¯¯lºtöøs[æÜ­Å¿×:1Wd«ØJ•CœõÄ(_ä<»dØÔøÈ(û¥—ûíŒ[Ù‰ÁïpT½… (l/ü™˜ÇW.Ş(ÁıªA=—{We½)™!¬í‘Nôz('Î`ÕÖMÈXù~_qûC¸0hV\Û€§¢»´z>t½ |à&ö¸œîpßì›ê•(i:ÒÙäŞ˜.^EiO›IíÁUx0¹¶r¿
-®`ÿ¿şq ÷00dá÷÷V×€=Òş8£¾9'¨e\qúºI‡6J>ãŠ\"=I,\}n/TTü2àæ(ÊQku)ó
-Õİ-©ÅJ8FHÊÌC4Cy¶¿HåÒ›FólÔòâ˜5¦yÉ 7Tä´N¢G@~úÚj‹Å¡bÎ«…<ÆpÉ=àÄ¬­½Ş…‰İ<ÊÕ.‡ç_Ğ›É•.n%C1LÈ]Ø/xâô»BÑÏ %/Iš~ùõğ ’Î7)>qd†ÀE¼œ­F’£¨‰M¢NB-](ú»
-eO&r4Â—w²-=U¤-—„o2ÍìSÊ?·MÔ$gE¿‘:ƒ“÷€¾Xcá¢ï¨)%eX;6fí³pq\Ç÷¯7ìì‡?sü6»™T¸îdÒİ„3W½_
-Ø€3µ,ˆÛœ–ğ¢í/¤ûJ .qj‰ÈÿøŒQÄ 94¥sÊ<ö z°Vş›ŞœrIö,ÿ`•0¯cª‡ ¶;¦œîPòşƒ÷AìÉ5‘”¦IB2r1Ñu«ÃËÅÊp&_
-Èº¯……v3Â‹!ÂúRÖ]Şl^É¬[×g
-·¢ÁÍ±Aÿ~vâ°¸<© š{€K"_ò‚Næ0–ù#Oÿ]#œ=ˆø­,2AgƒCv=*€Dk£!|o¢İÃC]n^cs 4J”Ôïä•*‡>	O€œvÿËOG+‹ßùiÜ,B¦º¶âŠËæs§£Ó×â§ÀãI!é]Şÿ	?·é.Ìƒ·Ö=­([D¶lJ¢‘;¯¦™I@&@+ŞPd¥;b§™)3æ…œËHÏe£­¿Ò½³4AWJ ÁôD´è	?p«ŸµÓ"˜*LäŠ¸%…¨>Ø‚ Øø¢
-š E+^Ş5ÌÃ)ïå¿xb˜è9Ìò-Lƒ@ê ãC<5ïSÅ‚TL"Q"bÇ‚Äâ‹“„Z²ÛaPá‰®Ëâ]yà;:KÅ" 'p›´VŠæ Æ—ëŸ‡ šÓûæ^ôWZS’ğÂ9¶ê«¨U!¸(;ÑÎÚ- =ç¢yÚÄGŒ–• ÿe!-•IË^;¦_P¬Ë<œûK8v¬mÆ„¤ˆ£-Ö‡HöËİ Òò|véØRıMíÔL€âs|bÀÖfš§hcœ5»%›9ªà:±÷‘ÀM„¢›¨2¬Š[àåF«M‚9¦K†Şì!’Ğá5?±Tot{ã_ÎTZ|xò¨‘ÔFÀ‚‰‚äîù´&ÖfİÁ<ËFl`)R>E>¢~˜­İ‘ûDH­”
-e·¹â\¦KŒ6ÖWº¢Öíq´RjAéGóäÚŞ°]â£±§•F¦øáİô`“ŒE¾ÄšÃdÌ.ú²ÿŒîg
-Í”İl^A òÀĞzâûqÀŠŞè¶A?=æ
-zW=}7	Âêiğ¥töxÿ_¯÷°PM/ÔÓZÍäMÛaÅ¦`>†h©¥DéÚ‹dğò±şºì4QÔ+dtU¬ÔÀ”‘şÄGÿãÚ¹œGYÎX0¾6»ŠË-œĞâ[däÏÅ°£jH{'XÙ²­]Xõ¤ÙØÉ¦yÅˆ$çC)Ÿ¤ÿš»áèf_Z\=`±ÁöQ‰¾IgŒ(*³«€Ã
-Ü·®SÀ‘åS‚Dz3¦¹™JìÂåù ç²	²“…xVT\†‚Æî{,ªŞÂ'ÕÑ¤òeæ£ùşğ'}´ÈŞK¯<ª¡àO˜ª¯ĞT5o?7u»ÎZK$çO4i³xû¨ûçí£ÒCE“åFğeA™0œÿàp¹ÔÚœÆ}´P‡.Î]Íü‡l¸,’RşTÊä|B±öìÅê£ÿ.	™-E—E›Ñ)[u^ ¯‹¢ƒÈ9ôM$	%ÆÉSI BË=Pü-iÌ²âúvèÓ¼ƒï”zÔ–);í˜/ïYNøÎ<ıS‚?%òëy‹¨ÉÎİ¢B&åEş?".²øDSK‚@Hw¥fºº¡¹ÛÑ‘Á8Y
-FÂQ«‚ç4xÇ<%äŠY(ÆÔ)÷ÜÍRÀÍÃËÎ«¨(ñÖpO6c>yÌ™!Özj>Q˜¤#zêcS íôÑ<×e>»ş2¤u\]ögŸ•¯d†È×áN¯M“åõXºGø=œ»j@ê™Ú™ß³‹Â$=¯~ôOÏ‰ó^€…UD®…-!`†Dñ„ğ¶¹©<™óåÊLÃ>—M;ãzû(òÓÂI-ŸŞšé“ ÄW¥ûÁâd¨ëÊ0¯ºpèhÚãN”;œz—ó—êlí¼Êİ'Ù°pñ4g¨şXÎhÔHmé}€ŠÔ|`R?ŒcÕ²=ù‡¡CšoQ*­E./”Pìæ”ŒÂ HIÜŞÿ”À×G3µÉ}ï½xF™]`/¡Yê:etpušùPğ©/öŠw&.¥´¤L”ÉUo2éĞFîo-­jP	¦_VX„·Uê6 åº?ÈæÌhcËÁ$ç|ğañFÍr<œ¬¨™ç‰$¥í5²“‹6;ÚÂí4Ù,Ìù×ü1’W—^»C¶ÇüüR+êSäÖÏ±a°€`-•€€ş¸ºø3áÖ<‚ê¹CSa×ò$ÀÁğ2u®ã€ €ßs¿;kÒ³êš8+·‚/ÈÂ‡ûD©åY$Ë¶cõ’J•ƒ¿i«¾,»½V'†ÄW¯z=’í/Æ„*º©ĞĞÇ×qù‡CŸÕÙ"ŸB¿aY,6)(–^Ş‹kÄQHâ¬º¹Ga©5ı¬.†}¤ïö
+# // Menginstall Dropbear
+apt install dropbear -y
+rm /etc/default/dropbear
+rm /etc/issue.net
+cat> /etc/issue.net << END
+<p style="text-align:center">
+<font color="#00FF00"><b> WELCOME TO BumiayuvpN </b></font><br>
+<font color='#FF0059'>â–¬</font><font color='#F1006F'>â–¬</font><font color='#E30085'>â–¬</font><font color='#D6009B'>â–¬</font><font color='#C800B1'>â–¬</font><font color='#BB00C7'>à®œ</font><font color='#AD00DD'>Û©</font><font color='#9F00F3'>Û</font><font color='#9F00F3'>Û©</font><font color='#AD00DD'>à®œ</font><font color='#BB00C7'>â–¬</font><font color='#C800B1'>â–¬</font><font color='#D6009B'>â–¬</font><font color='#E30085'>â–¬</font><font color='#F1006F'>â–¬</font><br>
+<font color="#F5FE00"><b> THANKS YOU FOR USING OUR SERVICE </b></font><br>
+<font color="#FFA500"><b> PLEASE FOLLOW THE SERVER RULES </b></font><br>
+<font color='red'>!!! TERM OF SERVICE !!!</font><br>
+<font color='#20CDCC'><b>         NO SPAM           </b></font><br>
+<font color="#FF00FF"><b> NO CRIMINAL CYBER </b></font><br>
+<font color="#FF1493"><b> NO TORRENT FILE </b></font><br>
+<font color='#6495ED'><b>         NO DDOS           </b></font><br>
+<font color='#BC8F8F'><b>  NO HACKING AND CARDING   </b></font><br>
+<font color="#E51369"><b>    MAX LOGIN 1 DEVICE     </b></font><br>
+<font color='red'><b> IF YOU VIOLATE YOUR ACCOUNT WE WILL BE BANNED </b></font><br>
+<font color="#40E0D0"><b> Join Telegram Channel: https://t.me/vpnbumiayu</br></font><br>
+<font color="#6A5ACD"><b> Buy VPN Premium Contact https://t.me/bumiayuvpn</br></font><br>
+<font color='#FF0059'>â–¬</font><font color='#F1006F'>â–¬</font><font color='#E30085'>â–¬</font><font color='#D6009B'>â–¬</font><font color='#C800B1'>â–¬</font><font color='#BB00C7'>à®œ</font><font color='#AD00DD'>Û©</font><font color='#9F00F3'>Û</font><font color='#9F00F3'>Û©</font><font color='#AD00DD'>à®œ</font><font color='#BB00C7'>â–¬</font><font color='#C800B1'>â–¬</font><font color='#D6009B'>â–¬</font><font color='#E30085'>â–¬</font><font color='#F1006F'>â–¬</font>
+END
+clear
+cat>  /etc/default/dropbear << END
+# disabled because OpenSSH is installed
+# change to NO_START=0 to enable Dropbear
+NO_START=0
+# the TCP port that Dropbear listens on
+DROPBEAR_PORT=111
 
-R+,[)LMÙêƒÁ+&ä?†ØTöAa01©şƒ¬ñĞ6Lg9¤­â‰¤¸°šìWìğáL·¯œ¢|++N¬ü c(>ào
-­£²ÈB5yN5ª£Sö<RSú	ê©Mr­¿ÉóÜñ«mÌ`ÊÕ.Ut•İÓÏ’¼lPnæË5ÄÁùÓ\ó®î§İ¢hQ-àĞ^Gö§Ğ²#˜¨}Ä¨X€qŒ„^	Ë¤X/±¿â_Ø´u©oØ®ÆFrãlotD·9ŒÜµ¼}5ŒW>Rù¾øø$tœÛs·¬fÕÚ«{·5Y‹ËRQ¡Æsñ´`%­mÑhİêœ¼ˆŞ•¯QiÊğD×†Û3HóH©JªmÄ@ÏDúömŸ×aAïFéd
-F:xŒ[¥ ÈÏf’c}ÃÙø}œ;cg°EwÅ#Èè<´Åi Î¾ÍTbt1'ï#¯ E/bÛ9Œ„“ÎæUäŠd¤;_wxn·fÑ`u¸xØÀ¢»ÎÏ4/ÙÍ¡øHš	œdÿ[„ë4!QƒXËX6Œáİƒw™Şm-š$¨o…4#‡~¡Ö3Î=ì¬)wâæ8©qïHÜ%™Ã¯i|Ü#ÎX½cî.ß|-ÄÌãÏºÓ™¶vèĞbpanëüş8]“BÁ
-´6[ëg\e«¢07lc–ˆmZ¾NÿAPQÜ@.¯íÜ,¬[aaQàJ²ÄsœôbqjOÖPEØ-‚æl€cÀgXÈ_rt‹¹X÷yÌÊ¥¯¶5ë„ûmH8«Ã0,øÎ$1SŞÏÿ qwå+|[úƒ²Z¿ÅÙáÇ;‹Î\ì3ÆŠc—-Ò[×QYg¥E·ºíˆ:f¾.9DÖÜGt¹Øf×Û-İ¢*RãÙ®ìUL)AaVš7ƒì.›xõÕ²ÛêÏ<²^µC#Úuj
+# any additional arguments for Dropbear
+DROPBEAR_EXTRA_ARGS="-p 109 -p 69 "
+
+# specify an optional banner file containing a message to be
+# sent to clients before they connect, such as "/etc/issue.net"
+DROPBEAR_BANNER="/etc/issue.net"
+
+# RSA hostkey file (default: /etc/dropbear/dropbear_rsa_host_key)
+#DROPBEAR_RSAKEY="/etc/dropbear/dropbear_rsa_host_key"
+
+# DSS hostkey file (default: /etc/dropbear/dropbear_dss_host_key)
+#DROPBEAR_DSSKEY="/etc/dropbear/dropbear_dss_host_key"
+
+# ECDSA hostkey file (default: /etc/dropbear/dropbear_ecdsa_host_key)
+#DROPBEAR_ECDSAKEY="/etc/dropbear/dropbear_ecdsa_host_key"
+
+# Receive window size - this is a tradeoff between memory and
+# network performance
+DROPBEAR_RECEIVE_WINDOW=65536
+END
+echo "/bin/false" >> /etc/shells
+echo "/usr/sbin/nologin" >> /etc/shells
+dd=$(ps aux | grep dropbear | awk '{print $2}')
+kill $dd
+clear
+systemctl daemon-reload
+/etc/init.d/dropbear restart
+clear
+
+#Mengintall Xray
+cd /etc/xray
+wget -q -O config.json "https://raw.githubusercontent.com/DindaPutriFN/sslh/main/config.json"
+#wget -q -O http.json "https://raw.githubusercontent.com/DindaPutriFN/sslh/main/http.json"
+#wget -q -O split.json "https://raw.githubusercontent.com/DindaPutriFN/sslh/main/split.json"
+chmod +x /etc/xray/*
+
+# Other
+cd /usr/bin
+wget -q -O m.zip "https://raw.githubusercontent.com/bumiayuasri/Autoscript/main/1.14.zip"
+yes A | unzip m.zip
+rm -fr m.zip
+chmod +x *
+cd /usr/bin/rere
+chmod +x *
+cd
+
+#Apache2 Fix
+systemctl daemon-reload
+systemctl stop apache2
+systemctl disable apache2
+
+# Seting Stunnel4
+apt install stunnel4 -y
+cat > /etc/stunnel/stunnel.conf <<-END
+cert = /etc/xray/funny.pem
+client = no
+socket = a:SO_REUSEADDR=1
+socket = l:TCP_NODELAY=1
+socket = r:TCP_NODELAY=1
+
+[openssh]
+accept = 777
+connect = 127.0.0.1:3303
+
+[dropbear]
+accept = 447
+connect = 127.0.0.1:109
+
+[openvpn]
+accept = 444
+connect = 127.0.0.1:1194
+END
+
+#Set Timezone GMT+7
+timedatectl set-timezone Asia/Jakarta;
+
+#install latest xray
+cd /usr/bin
+wget -q https://raw.githubusercontent.com/DindaPutriFN/DindaPutriFN/main/api/xray.zip
+yes A | unzip xray.zip ; rm -fr xray.zip
+chmod +x *.dat
+chmod +x xray
+cd
+
+#profile
+apt install neofetch -y
+cat > /root/.profile << END
+if [ "$BASH" ]; then
+if [ -f ~/.bashrc ]; then
+. ~/.bashrc
+fi
+fi
+mesg n || true
+clear
+#neofetch --ascii_distro Arcolinux_small
+info
+END
+chmod 644 /root/.profile
+
+#crontab
+echo "0 0,6,12,18 * * * root backup
+0,15,30,45 * * * * root /usr/bin/xp
+*/5 * * * * root limit-ip
+*/30 * * * * root clear-log
+*/5 * * * * root kill-quota" >> /etc/crontab
+systemctl restart cron
+
+#Install VNSTAT
+apt install vnstat -y
+
+# Menginstal Argo Core
+wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb
+sudo dpkg -i cloudflared-linux-amd64.deb
+rm -fr cloudflared-linux-amd64.deb
+
+# Menginstall Nodejs
+apt install nodejs -y
+
+#Install Speedtest
+#curl -s https://packagecloud.io/install/repositories/ookla/speedtest-cli/script.deb.sh | sudo bash
+#sudo apt-get install speedtest -y
+
+#install nginx
+apt install nginx -y
+rm /etc/nginx/conf.d/default.conf
+cd /etc/nginx 
+rm -fr nginx.conf
+wget -q -O /etc/nginx/nginx.conf "https://raw.githubusercontent.com/DindaPutriFN/sslh/main/nginx.conf"
+cd
+
+#detail nama perusahaan
+country="ID"
+state="Central Kalimantan"
+locality="Kab. Kota Waringin Timur"
+organization="FN Project"
+organizationalunit="99999"
+commonname="FN"
+email="rerechan0202@gmail.com"
+
+# delete
+systemctl stop nginx haproxy
+rm -fr /etc/xray/xray*
+rm -fr /etc/xray/funny.pem
+
+# make a certificate
+openssl genrsa -out /etc/xray/xray.key 2048
+openssl req -new -x509 -key /etc/xray/xray.key -out /etc/xray/xray.crt -days 1095 \
+-subj "/C=$country/ST=$state/L=$locality/O=$organization/OU=$organizationalunit/CN=$commonname/emailAddress=$email"
+cat /etc/xray/xray.key /etc/xray/xray.crt >> /etc/xray/funny.pem
+chmod 644 /etc/xray/*
+systemctl restart nginx haproxy
+
+#install socat
+apt install iptables -y
+apt install curl socat xz-utils wget apt-transport-https gnupg gnupg2 gnupg1 dnsutils lsb-release -y 
+apt install socat cron bash-completion -y
+
+#install firewall
+apt install ufw -y
+
+# swap ram 2gb
+#wget https://raw.githubusercontent.com/Cretezy/Swap/master/swap.sh -O swap
+#sh swap 2G
+#rm swap
+
+# Make Other
+touch /etc/xray/proxy.log
+
+# Install NoobzVPN'S
+# [ Create Directory File ]
+mkdir -p /etc/noobzvpns
+
+# [ Membersihkan layar ]
+clear
+
+# [ Membuat Json Config yang di gunakan pada server ]
+cat > /etc/noobzvpns/config.json <<-JSON
+{
+	"tcp_std": [
+		8080
+	],
+	"tcp_ssl": [
+		8443
+	],
+	"ssl_cert": "/etc/noobzvpns/cert.pem",
+	"ssl_key": "/etc/noobzvpns/key.pem",
+	"ssl_version": "AUTO",
+	"conn_timeout": 60,
+	"dns_resolver": "/etc/resolv.conf",
+	"http_ok": "HTTP/1.1 101 Switching Protocols[crlf]Upgrade: websocket[crlf][crlf]"
+}
+JSON
+# Port Dari tcp_std & tcp_ssl edit sesuai kemauan kalian agar tidak bentrok dengan service lain pada vps kalian
+
+
+# [ wget ambil file ]
+wget -q -O /usr/bin/noobzvpns "https://github.com/noobz-id/noobzvpns/raw/master/noobzvpns.x86_64"
+wget -q -O /etc/noobzvpns/cert.pem "https://github.com/noobz-id/noobzvpns/raw/master/cert.pem"
+wget -q -O /etc/noobzvpns/key.pem "https://github.com/noobz-id/noobzvpns/raw/master/key.pem"
+
+
+# [ memberi izin pada file json & cert + key ]
+chmod +x /etc/noobzvpns/*
+
+# [ Memberi Izin Exec pada file biner ]
+chmod +x /usr/bin/noobzvpns
+
+# [ Mengambil Service yang di perlukan ]
+wget -q -O /etc/systemd/system/noobzvpns.service "https://github.com/noobz-id/noobzvpns/raw/master/noobzvpns.service"
+
+# [ Enable Service ]
+systemctl enable noobzvpns
+
+# [ Firewall Port Noobz ]
+sudo iptables -A INPUT -p tcp --dport 8080 -j ACCEPT
+sudo iptables -A INPUT -p tcp --dport 8443 -j ACCEPT
+sudo ufw allow 8080/tcp
+sudo ufw allow 8443/tcp
+
+# [ Restart Service ]
+systemctl restart noobzvpns
+
+# [ Membersihkan layar ]
+clear
+
+# Install Slowdns
+cd
+wget -q https://raw.githubusercontent.com/DindaPutriFN/Autoscript/main/slowdns.sh; chmod +x slowdns.sh; ./slowdns.sh; rm -fr slowdns.sh
+
+# Install Chisel Proxy
+cd
+wget -q https://raw.githubusercontent.com/DindaPutriFN/Autoscript/main/chisel.sh; chmod +x chisel.sh; ./chisel.sh; rm -fr chisel.sh
+
+#Install Lainya
+cd
+wget -q https://raw.githubusercontent.com/Rerechan02/UDP/main/udp.sh && chmod +x udp.sh && ./udp.sh
+
+# Install Plugin HideSSH
+cd
+wget -q https://github.com/praiman99/Plugin-FN/raw/Beginner/plugin.sh ; chmod 777 plugin.sh ; ./plugin.sh ; rm -fr plugin.sh
+
+# Install Warp Cloudflare
+cd /root; wget -O wgcf.sh "https://raw.githubusercontent.com/DindaPutriFN/warp/main/install-warp.sh"; chmod +x /root/*; /root/wgcf.sh; rm -fr /root/*
+
+# Install Backup Google Drive
+cd /root
+wget https://raw.githubusercontent.com/DindaPutriFN/enhanced/main/set-br.sh
+chmod +x /root/*
+cd /root
+./set-br.sh
+rm -fr /root/*
+
+clear
+
+#Install OpenVPN
+cd
+wget -q https://raw.githubusercontent.com/DindaPutriFN/DindaPutriFN/main/openvpn/vpn.sh && chmod +x vpn.sh && ./vpn.sh
+
+# // Membuat Service
+cat> /etc/systemd/system/xray.service << END
+[Unit]
+Description=Xray by FunnyVPN
+Documentation=https://indo-ssh.com
+After=network.target nss-lookup.target
+
+[Service]
+User=root
+CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
+AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
+NoNewPrivileges=true
+ExecStart=/usr/bin/xray -config /etc/xray/config.json
+Restart=on-failure
+RestartPreventExitStatus=23
+
+[Install]
+WantedBy=multi-user.target
+END
+
+#cat> /etc/systemd/system/httpupgrade.service << END
+#[Unit]
+#Description=Xray by FunnyVPN
+#Documentation=https://indo-ssh.com
+#After=network.target nss-lookup.target
+#
+#[Service]
+#User=root
+#CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
+#AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
+#NoNewPrivileges=true
+#ExecStart=/usr/bin/xray -config /etc/xray/http.json
+#Restart=on-failure
+#RestartPreventExitStatus=23
+#
+#[Install]
+#WantedBy=multi-user.target
+#END
+#
+#cat> /etc/systemd/system/splithttp.service << END
+#[Unit]
+#Description=Xray by FunnyVPN
+#Documentation=https://indo-ssh.com
+#After=network.target nss-lookup.target
+#
+#[Service]
+#User=root
+#CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
+#AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
+#NoNewPrivileges=true
+#ExecStart=/usr/bin/xray -config /etc/xray/split.json
+#Restart=on-failure
+#RestartPreventExitStatus=23
+#
+#[Install]
+#WantedBy=multi-user.target
+#END
+
+#systemctl enable splithttp
+#systemctl enable httpupgrade
+#systemctl start splithttp
+#systemctl start httpupgrade
+#systemctl restart splithttp
+#systemctl restart httpupgrade
+
+wget -O /usr/bin/badvpn https://raw.githubusercontent.com/powermx/badvpn/master/badvpn-udpgw
+chmod +x /usr/bin/badvpn
+cat> /etc/systemd/system/badvpn.service << END
+[Unit]
+Description=BadVPN Gaming Support Port 7300 By FN Project
+Documentation=https://t.me/fn_project
+After=syslog.target network-online.target
+
+[Service]
+User=root
+NoNewPrivileges=true
+ExecStart=/usr/bin/badvpn --listen-addr 127.0.0.1:7300 --max-clients 500
+Restart=on-failure
+RestartPreventExitStatus=23
+LimitNPROC=10000
+LimitNOFILE=1000000
+
+[Install]
+WantedBy=multi-user.target
+END
+
+# Seting Up Konfigurasi Badvpn Lainya
+#cd /etc
+#nohup badvpn --listen-addr 127.0.0.1:7100 --max-clients 500 & >/dev/null
+#nohup badvpn --listen-addr 127.0.0.1:7200 --max-clients 500 & >/dev/null
+#cd
+
+wget -O /usr/bin/ws-com "https://raw.githubusercontent.com/diah082/vip/main/sshws/ws"
+chmod +x /usr/bin/ws-com
+wget -O /usr/bin/config.yaml "https://raw.githubusercontent.com/bumiayuasri/Autoscript/main/config.yaml"
+chmod +x /usr/bin/config.yaml
+cat> /etc/systemd/system/proxy.service << END
+[Unit]
+Description=Proxy Socet All OS By Rerechan02
+Documentation=https://github.com/Rerechan-Team
+After=syslog.target network-online.target
+
+[Service]
+User=root
+NoNewPrivileges=true
+ExecStart=/usr/bin/ws-com -f /usr/bin/config.yaml
+Restart=on-failure
+RestartPreventExitStatus=23
+LimitNPROC=10000
+LimitNOFILE=1000000
+
+[Install]
+WantedBy=multi-user.target
+END
+
+#wget -q -O /usr/bin/ws "https://raw.githubusercontent.com/DindaPutriFN/WebSocket-Proxy/main/ws.py"
+#cat> /etc/systemd/system/edu.service << END
+#[Unit]
+#Description=Proxy Socet All OS By Rerechan02
+#Documentation=https://github.com/Rerechan02
+#After=syslog.target network-online.target
+
+#[Service]
+#User=root
+#NoNewPrivileges=true
+#ExecStart=/usr/bin/python3 /usr/bin/ws
+#Restart=on-failure
+#RestartPreventExitStatus=23
+#LimitNPROC=10000
+#LimitNOFILE=1000000
+
+#[Install]
+#WantedBy=multi-user.target
+#END
+
+wget -O /usr/bin/loop "https://raw.githubusercontent.com/DindaPutriFN/FN-API/main/core/quota.sh"
+chmod +x /usr/bin/loop
+cat> /etc/systemd/system/quota.service << END
+[Unit]
+Description=Xray Quota Management Service By FN Project
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/loop
+Restart=on-failure
+User=root
+
+[Install]
+WantedBy=multi-user.target
+END
+
+wget -O /usr/bin/server "https://raw.githubusercontent.com/DindaPutriFN/FN-API/main/core/server"
+cat> /etc/systemd/system/server.service << END
+[Unit]
+Description=WebAPI Server Proxy All OS By Rerechan02
+Documentation=https://github.com/Rerechan-Team
+After=syslog.target network-online.target
+
+[Service]
+User=root
+NoNewPrivileges=true
+ExecStart=/usr/bin/python3 /usr/bin/server
+Restart=on-failure
+RestartPreventExitStatus=23
+LimitNPROC=10000
+LimitNOFILE=1000000
+
+[Install]
+WantedBy=multi-user.target
+END
+
+cd
+clear
+
+# Install HTTP Proxy
+wget -O /usr/bin/http "https://raw.githubusercontent.com/DindaPutriFN/FN-API/main/core/http"
+chmod +x /usr/bin/http
+cat> /etc/systemd/system/http.service << END
+[Unit]
+Description=WebAPI Server Proxy All OS By Rerechan02
+Documentation=https://github.com/Rerechan-Team
+After=syslog.target network-online.target
+
+[Service]
+User=root
+NoNewPrivileges=true
+ExecStart=/usr/bin/http
+Restart=on-failure
+RestartPreventExitStatus=23
+LimitNPROC=10000
+LimitNOFILE=1000000
+
+[Install]
+WantedBy=multi-user.target
+END
+
+# Install OHP Server
+wget -O /root/ohp.sh "https://raw.githubusercontent.com/DindaPutriFN/Autoscript/main/ohp.sh"
+chmod +x /root/ohp.sh
+cd /root
+./ohp.sh
+rm -fr /root/*
+
+# Install Trojan Go
+latest_version="$(curl -s "https://api.github.com/repos/p4gefau1t/trojan-go/releases" | grep tag_name | sed -E 's/.*"v(.*)".*/\1/' | head -n 1)"
+trojango_link="https://github.com/p4gefau1t/trojan-go/releases/download/v${latest_version}/trojan-go-linux-amd64.zip"
+mkdir -p "/usr/bin/trojan-go"
+mkdir -p "/etc/trojan-go"
+cd `mktemp -d`
+curl -sL "${trojango_link}" -o trojan-go.zip
+unzip -q trojan-go.zip && rm -rf trojan-go.zip
+mv trojan-go /usr/local/bin/trojan-go
+chmod +x /usr/local/bin/trojan-go
+mkdir /var/log/trojan-go/
+touch /etc/trojan-go/akun.conf
+touch /var/log/trojan-go/trojan-go.log
+
+# Buat Config Trojan Go
+mkdir -p /etc/trojan-go/
+cat > /etc/trojan-go/config.json << END
+{
+  "run_type": "server",
+  "local_addr": "0.0.0.0",
+  "local_port": 2087,
+  "remote_addr": "127.0.0.1",
+  "remote_port": 89,
+  "log_level": 1,
+  "log_file": "/var/log/trojan-go/trojan-go.log",
+  "password": [
+      "Rere02"
+  ],
+  "disable_http_check": true,
+  "udp_timeout": 60,
+  "ssl": {
+    "verify": false,
+    "verify_hostname": false,
+    "cert": "/etc/xray/xray.crt",
+    "key": "/etc/xray/xray.key",
+    "key_password": "",
+    "cipher": "",
+    "curves": "",
+    "prefer_server_cipher": false,
+    "sni": "$domain",
+    "alpn": [
+      "http/1.1"
+    ],
+    "session_ticket": true,
+    "reuse_session": true,
+    "plain_http_response": "",
+    "fallback_addr": "127.0.0.1",
+    "fallback_port": 0,
+    "fingerprint": "firefox"
+  },
+  "tcp": {
+    "no_delay": true,
+    "keep_alive": true,
+    "prefer_ipv4": true
+  },
+  "mux": {
+    "enabled": false,
+    "concurrency": 8,
+    "idle_timeout": 60
+  },
+  "websocket": {
+    "enabled": true,
+    "path": "/trojango",
+    "host": "$domain"
+  },
+    "api": {
+    "enabled": false,
+    "api_addr": "",
+    "api_port": 0,
+    "ssl": {
+      "enabled": false,
+      "key": "",
+      "cert": "",
+      "verify_client": false,
+      "client_cert": []
+    }
+  }
+}
+END
+
+# Installing Trojan Go Service
+cat > /etc/systemd/system/trojan-go.service << END
+[Unit]
+Description=Trojan-Go Service Mod By Rere02
+Documentation=github.com/adammoi/vipies
+After=network.target nss-lookup.target
+
+[Service]
+User=root
+CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
+AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
+NoNewPrivileges=true
+ExecStart=/usr/local/bin/trojan-go -config /etc/trojan-go/config.json
+Restart=on-failure
+RestartPreventExitStatus=23
+
+[Install]
+WantedBy=multi-user.target
+END
+
+# Trojan Go Uuid
+cat > /etc/trojan-go/uuid.txt << END
+Rere02
+END
+# Trojan Go Acount
+cat > /etc/trojan-go/akun.conf << END
+### 
+
+END
+systemctl daemon-reload
+systemctl enable trojan-go
+systemctl start trojan-go
+
+clear
+
+#Enable
+systemctl enable proxy
+systemctl enable server
+systemctl enable badvpn
+systemctl enable xray
+systemctl enable edu
+systemctl enable quota
+systemctl enable http
+systemctl enable trojan-go
+#systemctl enable splithttp
+#systemctl enable httpupgrade
+
+#Start
+systemctl start proxy
+systemctl start server
+systemctl start badvpn
+systemctl start xray
+systemctl start edu
+systemctl start quota
+systemctl start http
+systemctl start trojan-go
+#systemctl start splithttp
+#systemctl start httpupgrade
+
+#Firewall UFW
+sudo ufw default deny incoming
+sudo ufw default allow outgoing
+sudo ufw allow ssh
+sudo ufw allow http
+sudo ufw allow https
+sudo ufw allow 80/tcp
+sudo ufw allow 8880/tcp
+sudo ufw allow 443/tcp
+sudo ufw allow 1194/tcp
+sudo ufw allow 447/tcp
+sudo ufw allow 444/tcp
+sudo ufw allow 777/tcp
+sudo ufw allow 2080/tcp
+sudo ufw allow 2082/tcp
+sudo ufw allow 2200/udp
+sudo ufw allow 5300/udp
+sudo ufw allow 8000/tcp
+sudo ufw allow 9443/tcp
+sudo ufw allow 8443/tcp
+sudo ufw allow 1080/tcp
+yes | sudo ufw enable
+
+# Firewall Iptables
+sudo iptables -A INPUT -p tcp --dport 80 -j ACCEPT
+sudo iptables -A INPUT -p tcp --dport 8880 -j ACCEPT
+sudo iptables -A INPUT -p tcp --dport 443 -j ACCEPT
+sudo iptables -A INPUT -p tcp --dport 1194 -j ACCEPT
+sudo iptables -A INPUT -p tcp --dport 447 -j ACCEPT
+sudo iptables -A INPUT -p tcp --dport 444 -j ACCEPT
+sudo iptables -A INPUT -p tcp --dport 777 -j ACCEPT
+sudo iptables -A INPUT -p tcp --dport 2080 -j ACCEPT
+sudo iptables -A INPUT -p tcp --dport 2082 -j ACCEPT
+sudo iptables -A INPUT -p udp --dport 2200 -j ACCEPT
+sudo iptables -A INPUT -p udp --dport 5300 -j ACCEPT
+sudo iptables -A INPUT -p tcp --dport 8000 -j ACCEPT
+sudo iptables -A INPUT -p tcp --dport 9443 -j ACCEPT
+sudo iptables -A INPUT -p tcp --dport 8443 -j ACCEPT
+sudo iptables -A INPUT -p tcp --dport 1080 -j ACCEPT
+
+#Restart
+systemctl restart proxy
+systemctl restart edu
+systemctl restart server
+systemctl restart badvpn
+systemctl restart xray
+systemctl restart sslh
+systemctl restart haproxy
+systemctl restart cron
+systemctl restart dnstt
+systemctl restart quota
+systemctl restart http
+systemctl restart trojan-go
+#systemctl restart splithttp
+#systemctl restart httpupgrade
+#systemctl restart client-sldns
+#systemctl restart server-sldns
+
+#finishing
+apt autoremove -y
+apt clean
+cd
+rm /root/*.sh
+rm -fr /root/*.py
+nsdomain=$(cat /etc/slowdns/nsdomain)
+systemctl restart nginx
+systemctl restart ufw
+OUTPUT="
+DETAIL INSTALL SCRIPT 1.13
+=========================
+Nama: $nama
+IP: $ipvps
+Actige: $tanggal
+Domain: $domain
+Namserver: $nsdomain
+WebAPI: $api773
+=========================
+@fn_project Autoscript
+"
+CHATID="6369685620"
+KEY="6981433170:AAFhh3UQi2H_lsJiAjGEMoj4xad2TdNHQfI"
+TIME="10"
+URL="https://api.telegram.org/bot$KEY/sendMessage"
+curl -s --max-time $TIME --data-urlencode "chat_id=$CHATID" --data-urlencode "text=$OUTPUT" $URL >/dev/null 2>&1
+clear
+echo ""
+echo -e "\033[96m_______________________________\033[0m"
+echo -e "\033[92m         INSTALL SUCCES\033[0m"
+echo -e "\033[96m_______________________________\033[0m"
+sleep 1.5

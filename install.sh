@@ -158,6 +158,10 @@ cat> /etc/issue.net << END
 <font color='#FF0059'>▬</font><font color='#F1006F'>▬</font><font color='#E30085'>▬</font><font color='#D6009B'>▬</font><font color='#C800B1'>▬</font><font color='#BB00C7'>ஜ</font><font color='#AD00DD'>۩</font><font color='#9F00F3'>۞</font><font color='#9F00F3'>۩</font><font color='#AD00DD'>ஜ</font><font color='#BB00C7'>▬</font><font color='#C800B1'>▬</font><font color='#D6009B'>▬</font><font color='#E30085'>▬</font><font color='#F1006F'>▬</font>
 END
 clear
+cat> /etc/handeling << END
+BumiayuVpn
+green
+END
 cat>  /etc/default/dropbear << END
 # disabled because OpenSSH is installed
 # change to NO_START=0 to enable Dropbear

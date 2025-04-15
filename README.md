@@ -27,7 +27,7 @@ apt update -y; apt upgrade -y; apt install gnupg tmux python3 -y; tmux new -s fn
 ```
 ***TAHAP 2***
 ```
-wget -q https://raw.githubusercontent.com/bmayu1/Autoscript/main/install.sh ; chmod +x *; ./install.sh
+wget -q https://raw.githubusercontent.com/bumiayuasri/Autoscript/main/install.sh ; chmod +x *; ./install.sh
 ```
 ***If there is a disconnection during installation***
  ```

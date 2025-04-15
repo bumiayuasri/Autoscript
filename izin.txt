@@ -1,11 +1,4 @@
 ### Rerechan02 202.152.240.50 Lifetime
-### DO3 159.89.205.70 Lifetime
-### IDC 103.171.85.88 Lifetime
-### IKD 82.153.226.230 Lifetime
-### IKD 45.158.126.107 Lifetime
-### DO4 128.199.206.134 Lifetime
-### IKD 82.153.226.235 Lifetime
-### IKD 82.153.226.235 Lifetime
 ### TES 152.42.165.217 Lifetime
 ### TES2 165.22.244.20 Lifetime
-### TES22 104.28.222.43 Lifetime
+

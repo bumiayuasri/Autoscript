@@ -8,3 +8,4 @@
 ### IKD 82.153.226.235 Lifetime
 ### TES 152.42.165.217 Lifetime
 ### TES2 165.22.244.20 Lifetime
+### TES22 2a09:bac5:55f3:1028::19c:1c Lifetime

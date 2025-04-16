@@ -603,26 +603,26 @@ cd
 clear
 
 # Install HTTP Proxy
-wget -O /usr/bin/http "https://raw.githubusercontent.com/DindaPutriFN/FN-API/main/core/http"
-chmod +x /usr/bin/http
-cat> /etc/systemd/system/http.service << END
-[Unit]
-Description=WebAPI Server Proxy All OS By Rerechan02
-Documentation=https://github.com/Rerechan-Team
-After=syslog.target network-online.target
+#wget -O /usr/bin/http "https://raw.githubusercontent.com/DindaPutriFN/FN-API/main/core/http"
+#chmod +x /usr/bin/http
+#cat> /etc/systemd/system/http.service << END
+#[Unit]
+#Description=WebAPI Server Proxy All OS By Rerechan02
+#Documentation=https://github.com/Rerechan-Team
+#After=syslog.target network-online.target
 
-[Service]
-User=root
-NoNewPrivileges=true
-ExecStart=/usr/bin/http
-Restart=on-failure
-RestartPreventExitStatus=23
-LimitNPROC=10000
-LimitNOFILE=1000000
+#[Service]
+#User=root
+#NoNewPrivileges=true
+#ExecStart=/usr/bin/http
+#Restart=on-failure
+#RestartPreventExitStatus=23
+#LimitNPROC=10000
+#LimitNOFILE=1000000
 
-[Install]
-WantedBy=multi-user.target
-END
+#[Install]
+#WantedBy=multi-user.target
+#END
 
 # Install OHP Server
 wget -O /root/ohp.sh "https://raw.githubusercontent.com/DindaPutriFN/Autoscript/main/ohp.sh"

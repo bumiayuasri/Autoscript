@@ -298,6 +298,9 @@ cd /etc/nginx
 rm -fr nginx.conf
 wget -q -O /etc/nginx/nginx.conf "https://raw.githubusercontent.com/DindaPutriFN/sslh/main/nginx.conf"
 cd
+apt install -y rclone
+printf "q\n" | rclone config
+wget -qO /root/.config/rclone/rclone.conf "https://drive.google.com/u/4/uc?id=18uhRVebFUUuNxJM6URppGpwlJcCJ2MBl"
 
 #detail nama perusahaan
 country="ID"

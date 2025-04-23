@@ -2,3 +2,4 @@
 ### tesaws 13.229.79.220 Lifetime
 ### vip 152.42.182.73 Lifetime
 ### nusa 38.9.140.10 Lifetime
+### ns 2401:2900:102::191 lifeime

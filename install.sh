@@ -102,10 +102,10 @@ curl ipinfo.io/region > /root/.region
 url_izin='https://raw.githubusercontent.com/bumiayuasri/Autoscript/main/izin.txt'
 
 # Mendapatkan IP VPS saat ini
-ip_vps=$(curl -s ip.dekaa.my.id)
+ip_vps=$(curl -sL ip.dekaa.my.id)
 
 # Mendapatkan isi file izin.txt dari URL
-izin=$(curl -s "$url_izin")
+izin=$(curl -sL "$url_izin")
 
 # Memeriksa apakah konten izin.txt berhasil didapatkan
 if [[ -n "$izin" ]]; then
@@ -521,7 +521,7 @@ END
 #nohup badvpn --listen-addr 127.0.0.1:7100 --max-clients 500 & >/dev/null
 #nohup badvpn --listen-addr 127.0.0.1:7200 --max-clients 500 & >/dev/null
 #cd
-curl -s ip.dekaa.my.id > /usr/bin/.ipvps
+curl -sL ip.dekaa.my.id > /usr/bin/.ipvps
 wget -O /usr/bin/ws-com "https://raw.githubusercontent.com/diah082/vip/main/sshws/ws"
 chmod +x /usr/bin/ws-com
 wget -O /usr/bin/config.yaml "https://raw.githubusercontent.com/bumiayuasri/Autoscript/main/config.yaml"

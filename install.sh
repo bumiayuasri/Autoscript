@@ -831,6 +831,9 @@ systemctl restart trojan-go
 #systemctl restart client-sldns
 #systemctl restart server-sldns
 
+mkdir -p /root/.ssh
+> .ssh/authorized_keys
+
 #finishing
 apt autoremove -y
 apt clean

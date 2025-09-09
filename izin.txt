@@ -5,4 +5,5 @@
 ### eznet 34.128.115.192 2025-06-30
 ### gcpsg 152.42.199.72 Lifetime
 ### tencent 43.173.2.215 Lifetime
-### Servku 103.168.146.180 Lifetime
+### Servku 103.168.146.166 Lifetime
+Servku 103.168.146.166 Lifetime
